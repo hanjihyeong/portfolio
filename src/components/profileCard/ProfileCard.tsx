@@ -27,6 +27,11 @@ const StContainer = styled.main`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 `;
 
 const StTitle = styled.p`
@@ -44,10 +49,18 @@ const StContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 90%;
+  height: 100%;
 `;
 
 const StLink = styled.a`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  &:hover {
+    text-decoration: none;
+    color: black;
 `;

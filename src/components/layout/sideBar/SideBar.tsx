@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const SideBar = () => {
   const lastUpdated = "2023/12/26";
+
   return (
     <StSideBar>
       <StContainer>
@@ -55,6 +56,9 @@ const StContent = styled.h1`
   width: 120%;
   &:hover {
     cursor: pointer;
+    text-decoration: underline;
+  }
+  &.active {
     text-decoration: underline;
   }
 `;
