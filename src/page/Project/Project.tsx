@@ -46,4 +46,5 @@ const StContainer = styled.main`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  background-color: rgba(110, 120, 125, 0.5);
 `;

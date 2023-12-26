@@ -31,7 +31,7 @@ const Introduction = () => {
 export default Introduction;
 
 const StCotainer = styled.section`
-  width: 1200px;
+  width: auto;
   height: auto;
   margin: 0 auto;
 `;

@@ -35,6 +35,7 @@ const StContainer = styled.main`
   align-items: center;
   border-radius: 30px;
   flex-direction: column;
+  background-color: white;
 `;
 
 const StImage = styled.img`
