@@ -19,7 +19,7 @@ export default Main;
 
 const StCotainer = styled.main`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;

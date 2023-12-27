@@ -135,7 +135,7 @@ const StButton = styled.button`
   width: 100px;
   height: 40px;
   background-color: white;
-  border: 1px solid black;
-  border-radius: 1rem;
+  border: 1px solid white;
+  border-radius: 0.5rem;
   font-size: 16px;
 `;
