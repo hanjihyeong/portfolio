@@ -2,6 +2,8 @@ import { addDoc, collection } from "firebase/firestore";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import db from "../../firebase";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 interface Contact {
   name: string;
@@ -10,6 +12,7 @@ interface Contact {
 }
 
 const Contact = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,6 +24,14 @@ const Contact = () => {
     try {
       const docRef = await addDoc(collection(db, "contacts"), data);
       console.log("Document written with ID: ", docRef.id);
+      Swal.fire({
+        text: "Success to add contact",
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "확인",
+      }).then(() => {
+        navigate("/");
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
     }
