@@ -16,6 +16,7 @@ const About = () => {
               <StProfileContent>Name : 한지형</StProfileContent>
               <StProfileContent>Age : 24</StProfileContent>
               <StProfileContent>Gender : male</StProfileContent>
+              <StProfileContent>Adress : jeju.jocheon</StProfileContent>
             </StInfoSection>
           </StProfileSection>
           <StIntroduction>Introduction</StIntroduction>
@@ -92,7 +93,7 @@ const StContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(110, 120, 125, 0.5);
+  background-color: #6e787d;
 `;
 
 const StAboutSection = styled.section`

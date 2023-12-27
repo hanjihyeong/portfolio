@@ -16,10 +16,12 @@ const ProjectCard = (project: Project) => {
   return (
     <StContainer>
       <StImage src={image} alt="project" />
-      <StTitle>{title}</StTitle>
-      <StDate>기간 : {date}</StDate>
-      <StDesc>{desc}</StDesc>
-      <StLink href={link}>GitHub</StLink>
+      <div>
+        <StTitle>{title}</StTitle>
+        <StDate>기간 : {date}</StDate>
+        <StDesc>{desc}</StDesc>
+        <StLink href={link}>GitHub</StLink>
+      </div>
     </StContainer>
   );
 };
@@ -27,15 +29,16 @@ const ProjectCard = (project: Project) => {
 export default ProjectCard;
 
 const StContainer = styled.main`
-  width: 300px;
-  height: 500px;
+  width: 600px;
+  height: 300px;
   border: 2px solid lightgray;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border-radius: 30px;
-  flex-direction: column;
+  flex-direction: row;
   background-color: white;
+  gap: 20px;
 `;
 
 const StImage = styled.img`
@@ -43,7 +46,6 @@ const StImage = styled.img`
   height: 250px;
   border-radius: 1rem;
   overflow: hidden;
-  margin-top: 20px;
 `;
 
 const StTitle = styled.h2`

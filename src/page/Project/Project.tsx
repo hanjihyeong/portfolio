@@ -46,5 +46,6 @@ const StContainer = styled.main`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: rgba(110, 120, 125, 0.5);
+  background-color: #6e787d;
+  flex-direction: column;
 `;
