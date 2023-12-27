@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FaSquareGithub } from "react-icons/fa6";
+import { SiBloglovin } from "react-icons/si";
+import { SiNotion } from "react-icons/si";
+import ProfileCard from "../../profileCard/ProfileCard";
 
 const SideBar = () => {
   const lastUpdated = "2023/12/26";
@@ -23,6 +27,32 @@ const SideBar = () => {
       <StContect>
         <StContectContent>devscott6685@gmail.com</StContectContent>
         <StContectContent>Last update: {lastUpdated}</StContectContent>
+        <StProfileSection>
+          <ProfileCard
+            title={
+              <>
+                <FaSquareGithub />
+              </>
+            }
+            content="https://github.com/hanjihyeong"
+          />
+          <ProfileCard
+            title={
+              <>
+                <SiBloglovin />
+              </>
+            }
+            content="https://blog.naver.com/scott_0801"
+          />
+          <ProfileCard
+            title={
+              <>
+                <SiNotion />
+              </>
+            }
+            content="https://devscott.notion.site/DevScott-d486455de6fd42e0ad1e195c9f3c2b67?pvs=4"
+          />
+        </StProfileSection>
       </StContect>
     </StSideBar>
   );
@@ -71,4 +101,16 @@ const StContect = styled.section`
 
 const StContectContent = styled.p`
   color: white;
+`;
+
+const StProfileSection = styled.section`
+  width: auto;
+  height: auto;
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  margin-right: 15px;
 `;
