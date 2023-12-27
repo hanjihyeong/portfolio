@@ -88,7 +88,7 @@ const StContainer = styled.main`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: rgba(110, 120, 125, 0.5);
+  background-color: #6e787d;
 `;
 
 const StTitle = styled.section`
@@ -101,6 +101,7 @@ const StTitle = styled.section`
   align-items: center;
   padding-bottom: 10px;
   border-bottom: 2px solid white;
+  color: white;
 `;
 
 const StImgContainer = styled.div`

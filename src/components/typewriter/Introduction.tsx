@@ -12,7 +12,7 @@ const Introduction = () => {
   ];
   const [text]: [string, TypewriterHelper] = useTypewriter({
     words,
-    loop: 10,
+    loop: 0,
   });
   return (
     <StCotainer>
