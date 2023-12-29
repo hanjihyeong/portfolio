@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
-import db from "../../firebase";
+import { db } from "../../firebase";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
