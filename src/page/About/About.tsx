@@ -56,7 +56,9 @@ const About = () => {
               <StIntroTitle onClick={() => handleClick(index)}>
                 <strong>{list.title}</strong>
               </StIntroTitle>
-              {visible[index] && <p>{list.content}</p>}
+              {visible[index] && (
+                <StIntroContent>{list.content}</StIntroContent>
+              )}
             </StIntroductionLi>
           ))}
         </StUlSection>
@@ -135,4 +137,8 @@ const StIntroductionLi = styled.li`
 
 const StIntroTitle = styled.div`
   cursor: pointer;
+`;
+
+const StIntroContent = styled.p`
+  margin: 0 0 0 20px;
 `;
