@@ -1,37 +1,59 @@
 import styled from "styled-components";
-import Project3Th from "../../assets/3thProject.png";
-import Project2Th from "../../assets/2thProject.jpg";
-import Portfolio from "../../assets/portfolio.png";
 import ProjectCard from "../../components/projectCard/ProjectCard";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db, storage } from "../../firebase";
+import { getDownloadURL, ref } from "firebase/storage";
+import Loading from "../../components/loading/Loading";
 
-const Projects = [
-  {
-    title: "모임?모임!",
-    date: "2023.11.27 - 12.22",
-    desc: "사람들과 모임을 형성하여 서로의 목표 달성을 지원하고 의지를 다질 수 있는 플랫폼",
-    link: "https://github.com/FE02-3ThProject/FrontEnd",
-    image: Project3Th,
-  },
-  {
-    title: "NewShop",
-    date: "2023.11.13 - 11.27",
-    desc: "백엔드와 협업연습을 위한 쇼핑몰 프로젝트",
-    link: "https://github.com/Project02-SHOP/FrontEnd/tree/develop",
-    image: Project2Th,
-  },
-  {
-    title: "Han's Portfolio",
-    date: "2023.12.26 -",
-    desc: "취업을 위한 포트폴리오 작성",
-    link: "https://github.com/hanjihyeong/portfolio",
-    image: Portfolio,
-  },
-];
+interface Project {
+  title: string;
+  date: string;
+  desc: string;
+  link: string;
+  image: string;
+  role: string;
+}
 
 const Project = () => {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getDocs(collection(db, "projects")).then(async (querySnapshot) => {
+      const fetchedProjects: Project[] = [];
+      const imageUrls: string[] = [];
+
+      // Firestore에서 가져온 프로젝트 데이터를 배열에 저장합니다.
+      querySnapshot.forEach((doc) => {
+        const projectData = doc.data() as Project;
+        fetchedProjects.push(projectData);
+      });
+
+      // 각 프로젝트의 이미지 URL을 가져옵니다.
+      for (const project of fetchedProjects) {
+        const imageRef = ref(storage, project.image);
+        const imageUrl = await getDownloadURL(imageRef);
+        imageUrls.push(imageUrl);
+      }
+
+      // 각 프로젝트에 실제 이미지 URL을 할당합니다.
+      const projectsWithImages = fetchedProjects.map((project, index) => ({
+        ...project,
+        image: imageUrls[index],
+      }));
+
+      setProjects(projectsWithImages);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <StContainer>
-      {Projects.map((project, index) => (
+      {projects.map((project, index) => (
         <ProjectCard key={index} project={project} />
       ))}
     </StContainer>

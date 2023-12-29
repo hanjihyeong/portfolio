@@ -8,20 +8,22 @@ interface Project {
     desc: string;
     link: string;
     image: string;
+    role: string;
   };
 }
 
 const ProjectCard = (project: Project) => {
-  const { title, date, desc, link, image } = project.project;
+  const { title, date, desc, link, image, role } = project.project;
   return (
     <StContainer>
       <StImage src={image} alt="project" />
-      <div>
+      <StSection>
         <StTitle>{title}</StTitle>
         <StDate>기간 : {date}</StDate>
         <StDesc>{desc}</StDesc>
+        <StRole>{role}</StRole>
         <StLink href={link}>GitHub</StLink>
-      </div>
+      </StSection>
     </StContainer>
   );
 };
@@ -41,6 +43,11 @@ const StContainer = styled.main`
   gap: 20px;
 `;
 
+const StSection = styled.section`
+  width: 250px;
+  height: 250px;
+`;
+
 const StImage = styled.img`
   width: 250px;
   height: 250px;
@@ -51,8 +58,8 @@ const StImage = styled.img`
 const StTitle = styled.h2`
   width: 250px;
   height: 30px;
-  margin: 10px 0 10px 0;
-  padding: 5px;
+  margin: 0;
+  padding-bottom: 10px;
   border-bottom: 1px solid lightgray;
 `;
 
@@ -64,6 +71,11 @@ const StDate = styled.p`
 `;
 
 const StDesc = styled.p`
+  width: 250px;
+  height: auto;
+`;
+
+const StRole = styled.p`
   width: 250px;
   height: auto;
 `;

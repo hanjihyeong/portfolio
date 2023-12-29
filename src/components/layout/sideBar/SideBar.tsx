@@ -6,7 +6,7 @@ import { SiNotion } from "react-icons/si";
 import ProfileCard from "../../profileCard/ProfileCard";
 
 const SideBar = () => {
-  const lastUpdated = "2023/12/26";
+  const lastUpdated = "2023/12/29";
 
   return (
     <StSideBar>
