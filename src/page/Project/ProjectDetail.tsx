@@ -5,6 +5,7 @@ import { db, storage } from "../../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
+import { TbClick } from "react-icons/tb";
 
 interface Project {
   title: string;
@@ -12,17 +13,30 @@ interface Project {
   desc: string;
   link: string;
   image: string;
-  role1: string;
-  role2: string;
-  role3: string;
-  role4: string;
-  role5: string;
+  role: [];
+  tech: {
+    [key: string]: string;
+  };
+  info: {
+    [key: string]: string;
+  };
+  function: {
+    [key: string]: string;
+  };
+  retro: {
+    [key: string]: string;
+  };
 }
 
 const ProjectDetail = () => {
   const ProjectTitle = decodeURIComponent(useParams().id as string);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [retroOpen, setRetroOpen] = useState(false);
+  const [roleOpen, setRoleOpen] = useState(false);
+  const [techOpen, setTechOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
+  const [functionOpen, setFunctionOpen] = useState(false);
   const project = projects[0];
 
   useEffect(() => {
@@ -57,8 +71,28 @@ const ProjectDetail = () => {
     });
   }, []);
 
-  console.log(ProjectTitle);
-  console.log(projects);
+  const handleRetroOpen = () => {
+    setRetroOpen(!retroOpen);
+  };
+
+  const handleRoleOpen = () => {
+    setRoleOpen(!roleOpen);
+  };
+
+  const handleTechOpen = () => {
+    setTechOpen(!techOpen);
+  };
+
+  const handleInfoOpen = () => {
+    setInfoOpen(!infoOpen);
+  };
+
+  const handleFunctionOpen = () => {
+    setFunctionOpen(!functionOpen);
+  };
+
+  console.log(project);
+
   if (loading) {
     return <Loading />;
   }
@@ -77,16 +111,81 @@ const ProjectDetail = () => {
             </StProjectLinkSection>
           </StProjectInfoSection>
         </StProjectInfo>
-        <StProjectRoleSection>
-          <StLabel>맡은 역할</StLabel>
-          <StUlSection>
-            <StLiSection>{project.role1}</StLiSection>
-            <StLiSection>{project.role2}</StLiSection>
-            {project.role3 && <StLiSection>{project.role3}</StLiSection>}
-            {project.role4 && <StLiSection>{project.role4}</StLiSection>}
-            {project.role5 && <StLiSection>{project.role5}</StLiSection>}
-          </StUlSection>
-        </StProjectRoleSection>
+        <StBottomSection>
+          <StProjectRoleSection>
+            <StLabel onClick={() => handleInfoOpen()}>
+              프로젝트 개요
+              <TbClick />
+            </StLabel>
+            {infoOpen && (
+              <StUlSection>
+                {Object.entries(project.info).map(([key, value], index) => (
+                  <StLiSection key={index}>
+                    <strong>{key}</strong> : {value}
+                  </StLiSection>
+                ))}
+              </StUlSection>
+            )}
+          </StProjectRoleSection>
+          <StProjectRoleSection>
+            <StLabel onClick={() => handleFunctionOpen()}>
+              프로젝트 주요 기능
+              <TbClick />
+            </StLabel>
+            {functionOpen && (
+              <StUlSection>
+                {Object.entries(project.function).map(([key, value], index) => (
+                  <StLiSection key={index}>
+                    <strong>{key}</strong> : {value}
+                  </StLiSection>
+                ))}
+              </StUlSection>
+            )}
+          </StProjectRoleSection>
+          <StProjectRoleSection>
+            <StLabel onClick={() => handleRoleOpen()}>
+              맡은 역할
+              <TbClick />
+            </StLabel>
+            {roleOpen && (
+              <StUlSection>
+                {project.role.map((role, index) => (
+                  <StLiSection key={index}>{role}</StLiSection>
+                ))}
+              </StUlSection>
+            )}
+          </StProjectRoleSection>
+          <StProjectRoleSection>
+            <StLabel onClick={() => handleTechOpen()}>
+              사용 기술
+              <TbClick />
+            </StLabel>
+            {techOpen && (
+              <StUlSection>
+                {Object.entries(project.tech).map(([key, value], index) => (
+                  <StLiSection key={index}>
+                    <strong>{key}</strong>: {value}
+                  </StLiSection>
+                ))}
+              </StUlSection>
+            )}
+          </StProjectRoleSection>
+          <StProjectRoleSection>
+            <StLabel onClick={() => handleRetroOpen()}>
+              회고
+              <TbClick />
+            </StLabel>
+            {retroOpen && (
+              <StUlSection>
+                {Object.entries(project.retro).map(([key, value], index) => (
+                  <StLiSection key={index}>
+                    <strong>{key}</strong>: {value}
+                  </StLiSection>
+                ))}
+              </StUlSection>
+            )}
+          </StProjectRoleSection>
+        </StBottomSection>
       </StProjectSection>
     </StContainer>
   );
@@ -103,11 +202,30 @@ const StContainer = styled.main`
   background-color: #6e787d;
 `;
 
+const StBottomSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #6e787d;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: none;
+  }
+`;
+
 const StProjectSection = styled.section`
   display: flex;
   gap: 10px;
   width: 50%;
-  height: auto;
+  height: 460px;
   align-items: flex-start;
   justify-content: center;
   border: 2px solid lightgray;
@@ -121,6 +239,7 @@ const StProjectInfo = styled.div`
   display: flex;
   border-bottom: 2px solid lightgray;
   padding-bottom: 10px;
+  width: 100%;
 `;
 
 const StProjectInfoSection = styled.section`
@@ -190,4 +309,6 @@ const StUlSection = styled.ul`
 
 const StLiSection = styled.li`
   margin-bottom: 10px;
+  width: 670px;
+  line-height: 2rem;
 `;
