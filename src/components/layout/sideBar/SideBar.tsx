@@ -6,8 +6,6 @@ import { SiNotion } from "react-icons/si";
 import ProfileCard from "../../profileCard/ProfileCard";
 
 const SideBar = () => {
-  const lastUpdated = "2023/12/29";
-
   return (
     <StSideBar>
       <StContainer>
@@ -26,7 +24,6 @@ const SideBar = () => {
       </StContainer>
       <StContect>
         <StContectContent>devscott6685@gmail.com</StContectContent>
-        <StContectContent>Last update: {lastUpdated}</StContectContent>
         <StProfileSection>
           <ProfileCard
             title={

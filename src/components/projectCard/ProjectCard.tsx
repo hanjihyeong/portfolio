@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 interface Project {
-  key: number;
+  key: string;
   project: {
     title: string;
     date: string;
@@ -14,9 +15,12 @@ interface Project {
 
 const ProjectCard = (project: Project) => {
   const { title, date, desc, link, image, role } = project.project;
+  const encodedTitle = encodeURIComponent(title);
   return (
     <StContainer>
-      <StImage src={image} alt="project" />
+      <Link to={`/project/${encodedTitle}`}>
+        <StImage src={image} alt="project" />
+      </Link>
       <StSection>
         <StTitle>{title}</StTitle>
         <StDate>기간 : {date}</StDate>
