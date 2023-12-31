@@ -13,7 +13,9 @@ const TechCard = (tech: Tech) => {
   const { image, familier } = tech.tech;
   return (
     <StImgContainer>
-      <StImg src={image} />
+      <StContainer>
+        <StImg src={image} />
+      </StContainer>
       <StImgText>{familier}</StImgText>
     </StImgContainer>
   );
@@ -21,13 +23,20 @@ const TechCard = (tech: Tech) => {
 
 export default TechCard;
 
-const StImg = styled.img`
+const StContainer = styled.div`
   width: 100px;
   height: 100px;
   background-color: white;
   border-radius: 1rem;
   border: 1px solid black;
+`;
+
+const StImg = styled.img`
+  width: 100px;
+  height: 100px;
+  background-color: white;
   object-fit: contain;
+  transform: scale(0.8);
 `;
 
 const StImgText = styled.span`
@@ -46,7 +55,7 @@ const StImgContainer = styled.div`
   position: relative;
   display: inline-block;
   &:hover {
-    ${StImg} {
+    ${StContainer} {
       cursor: pointer;
       filter: brightness(20%);
     }
