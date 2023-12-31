@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MyImg from "../../assets/backgroundImg.jpg";
 import { useState } from "react";
+import { TbClick } from "react-icons/tb";
 
 const About = () => {
   const [visible, setVisible] = useState([false, false, false, false]);
@@ -54,7 +55,10 @@ const About = () => {
           {introductions.map((list, index) => (
             <StIntroductionLi key={index}>
               <StIntroTitle onClick={() => handleClick(index)}>
-                <strong>{list.title}</strong>
+                <strong>
+                  {list.title}
+                  <TbClick />
+                </strong>
               </StIntroTitle>
               {visible[index] && (
                 <StIntroContent>{list.content}</StIntroContent>

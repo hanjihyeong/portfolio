@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Tech {
-  key: number;
+  key: string;
   tech: {
     title: string;
     image: string;

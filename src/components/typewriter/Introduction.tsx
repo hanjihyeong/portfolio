@@ -33,7 +33,9 @@ export default Introduction;
 const StCotainer = styled.section`
   width: auto;
   height: auto;
-  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const StContent = styled.div`
