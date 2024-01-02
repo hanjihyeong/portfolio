@@ -24,20 +24,15 @@ const Project = () => {
       const fetchedProjects: Project[] = [];
       const imageUrls: string[] = [];
 
-      // Firestore에서 가져온 프로젝트 데이터를 배열에 저장합니다.
       querySnapshot.forEach((doc) => {
         const projectData = doc.data() as Project;
         fetchedProjects.push(projectData);
       });
-
-      // 각 프로젝트의 이미지 URL을 가져옵니다.
       for (const project of fetchedProjects) {
         const imageRef = ref(storage, project.image);
         const imageUrl = await getDownloadURL(imageRef);
         imageUrls.push(imageUrl);
       }
-
-      // 각 프로젝트에 실제 이미지 URL을 할당합니다.
       const projectsWithImages = fetchedProjects.map((project, index) => ({
         ...project,
         image: imageUrls[index],
@@ -70,4 +65,5 @@ const StContainer = styled.main`
   align-items: center;
   background-color: #6e787d;
   flex-direction: column;
+  color: black;
 `;

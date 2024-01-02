@@ -14,7 +14,7 @@ interface Project {
 }
 
 const ProjectCard = (project: Project) => {
-  const { title, date, desc, link, image, role } = project.project;
+  const { title, date, desc, link, image } = project.project;
   const encodedTitle = encodeURIComponent(title);
   return (
     <StContainer>
@@ -25,7 +25,6 @@ const ProjectCard = (project: Project) => {
         <StTitle>{title}</StTitle>
         <StDate>기간 : {date}</StDate>
         <StDesc>{desc}</StDesc>
-        <StRole>{role}</StRole>
         <StLink href={link}>GitHub</StLink>
       </StSection>
     </StContainer>
@@ -75,11 +74,6 @@ const StDate = styled.p`
 `;
 
 const StDesc = styled.p`
-  width: 250px;
-  height: auto;
-`;
-
-const StRole = styled.p`
   width: 250px;
   height: auto;
 `;

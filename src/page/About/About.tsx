@@ -80,6 +80,7 @@ const StContainer = styled.main`
   justify-content: center;
   align-items: center;
   background-color: #6e787d;
+  color: black;
 `;
 
 const StProfile = styled.div`

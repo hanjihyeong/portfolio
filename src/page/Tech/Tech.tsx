@@ -23,8 +23,6 @@ const Tech = () => {
     setVisible((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  console.log(visible);
-
   useEffect(() => {
     getDocs(collection(db, "teckstacks")).then(async (querySnapshot) => {
       const fetchedTechStacks: Tech[] = [];
