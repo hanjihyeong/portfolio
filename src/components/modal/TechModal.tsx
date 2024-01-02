@@ -69,6 +69,7 @@ const StModal = styled.div<StModalProps>`
   border-radius: 30px;
   animation: ${(props) => (props.visible ? StSlideUp : StSlideDown)} 0.5s
     forwards;
+  color: black;
 `;
 
 const StTechTitle = styled.h2`
