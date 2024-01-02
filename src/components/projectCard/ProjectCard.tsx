@@ -78,11 +78,6 @@ const StDesc = styled.p`
   height: auto;
 `;
 
-const StRole = styled.p`
-  width: 250px;
-  height: auto;
-`;
-
 const StLink = styled.a`
   color: black;
   margin-bottom: 5px;
