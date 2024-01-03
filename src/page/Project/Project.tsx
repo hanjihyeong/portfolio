@@ -2,9 +2,14 @@ import styled from "styled-components";
 import ProjectCard from "../../components/projectCard/ProjectCard";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import { getDownloadURL, ref } from "firebase/storage";
+import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./MainSwiper.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 interface Project {
   title: string;
@@ -22,23 +27,13 @@ const Project = () => {
   useEffect(() => {
     getDocs(collection(db, "projects")).then(async (querySnapshot) => {
       const fetchedProjects: Project[] = [];
-      const imageUrls: string[] = [];
 
       querySnapshot.forEach((doc) => {
         const projectData = doc.data() as Project;
         fetchedProjects.push(projectData);
       });
-      for (const project of fetchedProjects) {
-        const imageRef = ref(storage, project.image);
-        const imageUrl = await getDownloadURL(imageRef);
-        imageUrls.push(imageUrl);
-      }
-      const projectsWithImages = fetchedProjects.map((project, index) => ({
-        ...project,
-        image: imageUrls[index],
-      }));
 
-      setProjects(projectsWithImages);
+      setProjects(fetchedProjects);
       setLoading(false);
     });
   }, []);
@@ -48,9 +43,27 @@ const Project = () => {
   }
   return (
     <StContainer>
-      {projects.map((project) => (
-        <ProjectCard key={project.title} project={project} />
-      ))}
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        loop={true}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {projects.map((project) => (
+          <SwiperSlide key={project.title}>
+            <ProjectCard key={project.title} project={project} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </StContainer>
   );
 };
@@ -61,9 +74,9 @@ const StContainer = styled.main`
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   background-color: #6e787d;
-  flex-direction: column;
   color: black;
+  overflow: hidden;
 `;

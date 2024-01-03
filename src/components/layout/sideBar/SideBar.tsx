@@ -4,22 +4,48 @@ import { FaSquareGithub } from "react-icons/fa6";
 import { SiBloglovin } from "react-icons/si";
 import { SiNotion } from "react-icons/si";
 import ProfileCard from "../../profileCard/ProfileCard";
+import { useState } from "react";
 
 const SideBar = () => {
+  const [active, setActive] = useState("/");
+
+  const handleActive = (value: string) => {
+    setActive(value);
+  };
+  ``;
+
   return (
     <StSideBar>
       <StContainer>
         <Link to="/">
-          <StContent>Home</StContent>
+          {active === "/" ? (
+            <StContentActive>Home</StContentActive>
+          ) : (
+            <StContent onClick={() => handleActive("/")}>Home</StContent>
+          )}
         </Link>
         <Link to="/about">
-          <StContent>About</StContent>
+          {active === "/about" ? (
+            <StContentActive>About</StContentActive>
+          ) : (
+            <StContent onClick={() => handleActive("/about")}>About</StContent>
+          )}
         </Link>
         <Link to="/projects">
-          <StContent>Projects</StContent>
+          {active === "/projects" ? (
+            <StContentActive>Projects</StContentActive>
+          ) : (
+            <StContent onClick={() => handleActive("/projects")}>
+              Projects
+            </StContent>
+          )}
         </Link>
         <Link to="/tech">
-          <StContent>Tech</StContent>
+          {active === "/tech" ? (
+            <StContentActive>Tech</StContentActive>
+          ) : (
+            <StContent onClick={() => handleActive("/tech")}>Tech</StContent>
+          )}
         </Link>
       </StContainer>
       <StContect>
@@ -85,9 +111,18 @@ const StContent = styled.h1`
     cursor: pointer;
     text-decoration: underline;
   }
-  &.active {
-    text-decoration: underline;
-  }
+`;
+
+const StContentActive = styled.h1`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  width: 120%;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const StContect = styled.section`

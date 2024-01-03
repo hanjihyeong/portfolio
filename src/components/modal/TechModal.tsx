@@ -8,17 +8,17 @@ interface Tech {
 }
 
 interface StModalProps {
-  visible: boolean;
+  $visible: boolean;
 }
 
 interface TechModalProps {
-  visible: { [key: string]: boolean };
+  isVisible: boolean;
   tech: Tech;
 }
 
-const TechModal = ({ tech, visible }: TechModalProps) => {
+const TechModal = ({ tech, isVisible }: TechModalProps) => {
   return (
-    <StModal visible={visible[tech.title]}>
+    <StModal $visible={isVisible}>
       <StTechTitle>{tech.title.toUpperCase()}</StTechTitle>
       <StTechSection>
         <StTechImg src={tech.image} alt={tech.title} />
@@ -67,7 +67,7 @@ const StModal = styled.div<StModalProps>`
   z-index: 100;
   border: 2px solid lightgray;
   border-radius: 30px;
-  animation: ${(props) => (props.visible ? StSlideUp : StSlideDown)} 0.5s
+  animation: ${(props) => (props.$visible ? StSlideUp : StSlideDown)} 0.5s
     forwards;
   color: black;
 `;
