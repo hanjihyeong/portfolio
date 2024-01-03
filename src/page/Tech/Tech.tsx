@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db, storage } from "../../firebase";
-import { getDownloadURL, ref } from "firebase/storage";
+import { db } from "../../firebase";
 import TechCard from "../../components/techCard/TechCard";
 import Loading from "../../components/loading/Loading";
 import TechModal from "../../components/modal/TechModal";
@@ -24,27 +23,15 @@ const Tech = () => {
   };
 
   useEffect(() => {
-    getDocs(collection(db, "teckstacks")).then(async (querySnapshot) => {
+    getDocs(collection(db, "teckstacks")).then((querySnapshot) => {
       const fetchedTechStacks: Tech[] = [];
-      const imageUrls: string[] = [];
 
       querySnapshot.forEach((doc) => {
-        const techstacksData = doc.data() as Tech;
-        fetchedTechStacks.push(techstacksData);
+        const techstackData = doc.data() as Tech;
+        fetchedTechStacks.push(techstackData);
       });
 
-      for (const techstack of fetchedTechStacks) {
-        const imageRef = ref(storage, techstack.image);
-        const imageUrl = await getDownloadURL(imageRef);
-        imageUrls.push(imageUrl);
-      }
-
-      const techStackWithImages = fetchedTechStacks.map((techstack, index) => ({
-        ...techstack,
-        image: imageUrls[index],
-      }));
-
-      setTechStack(techStackWithImages);
+      setTechStack(fetchedTechStacks);
       setLoading(false);
     });
   }, []);
@@ -59,13 +46,10 @@ const Tech = () => {
     return (
       <StSection>
         {techArray.slice(start, end).map((tech) => (
-          <div onClick={() => handleClick(tech.title)}>
+          <div key={tech.title} onClick={() => handleClick(tech.title)}>
             <TechCard key={tech.title} tech={tech} />
             {visible[tech.title] && (
-              <TechModal
-                tech={tech}
-                visible={{ [tech.title]: visible[tech.title] }}
-              />
+              <TechModal tech={tech} isVisible={visible[tech.title]} />
             )}
           </div>
         ))}

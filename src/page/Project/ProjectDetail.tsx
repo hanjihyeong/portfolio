@@ -1,8 +1,7 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { db, storage } from "../../firebase";
-import { getDownloadURL, ref } from "firebase/storage";
+import { useNavigate, useParams } from "react-router-dom";
+import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
 import { TbClick } from "react-icons/tb";
@@ -38,6 +37,7 @@ const ProjectDetail = () => {
   const [infoOpen, setInfoOpen] = useState(false);
   const [functionOpen, setFunctionOpen] = useState(false);
   const project = projects[0];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const projectRef = collection(db, "projects");
@@ -45,7 +45,6 @@ const ProjectDetail = () => {
 
     getDocs(q).then(async (querySnapshot) => {
       const fetchedProjects: Project[] = [];
-      const imageUrls: string[] = [];
 
       // Firestore에서 가져온 프로젝트 데이터를 배열에 저장합니다.
       querySnapshot.forEach((doc) => {
@@ -53,20 +52,7 @@ const ProjectDetail = () => {
         fetchedProjects.push(projectData);
       });
 
-      // 각 프로젝트의 이미지 URL을 가져옵니다.
-      for (const project of fetchedProjects) {
-        const imageRef = ref(storage, project.image);
-        const imageUrl = await getDownloadURL(imageRef);
-        imageUrls.push(imageUrl);
-      }
-
-      // 각 프로젝트에 실제 이미지 URL을 할당합니다.
-      const projectsWithImages = fetchedProjects.map((project, index) => ({
-        ...project,
-        image: imageUrls[index],
-      }));
-
-      setProjects(projectsWithImages);
+      setProjects(fetchedProjects);
       setLoading(false);
     });
   }, []);
@@ -91,14 +77,13 @@ const ProjectDetail = () => {
     setFunctionOpen(!functionOpen);
   };
 
-  console.log(project);
-
   if (loading) {
     return <Loading />;
   }
   return (
     <StContainer>
       <StProjectSection>
+        <StButton onClick={() => navigate("/projects")}>돌아가기</StButton>
         <StProjectInfo>
           <StProjectImg src={project.image} alt="projectImg" />
           <StProjectInfoSection>
@@ -106,7 +91,7 @@ const ProjectDetail = () => {
             <StProjectDate>기간 : {project.date}</StProjectDate>
             <StProjectDesc>{project.desc}</StProjectDesc>
             <StProjectLinkSection>
-              <span>GitHub</span>
+              <strong>GitHub</strong>
               <StProjectLink href={project.link}>{project.link}</StProjectLink>
             </StProjectLinkSection>
           </StProjectInfoSection>
@@ -203,6 +188,19 @@ const StContainer = styled.main`
   color: black;
 `;
 
+const StButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  background-color: white;
+  &:hover,
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
+
 const StBottomSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -234,6 +232,7 @@ const StProjectSection = styled.section`
   margin-top: 15px;
   background-color: white;
   flex-direction: column;
+  position: relative;
 `;
 
 const StProjectInfo = styled.div`
@@ -268,11 +267,13 @@ const StProjectTitle = styled.h1`
 
 const StProjectDate = styled.p`
   margin: 15px 0 0 0;
+  font-weight: bold;
 `;
 
 const StProjectDesc = styled.p`
   width: 90%;
   margin: 10px 0 0 0;
+  font-weight: bold;
 `;
 
 const StProjectLinkSection = styled.div`
@@ -287,6 +288,7 @@ const StProjectLink = styled.a`
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 1;
+  font-weight: bold;
   &:hover {
     color: black;
   }

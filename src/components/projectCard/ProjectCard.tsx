@@ -44,6 +44,7 @@ const StContainer = styled.main`
   flex-direction: row;
   background-color: white;
   gap: 20px;
+  z-index: 100;
 `;
 
 const StSection = styled.section`

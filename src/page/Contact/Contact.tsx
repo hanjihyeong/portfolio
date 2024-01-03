@@ -37,7 +37,6 @@ const Contact = () => {
     }
   };
 
-  console.log(import.meta.env);
   return (
     <StContainer>
       <StContactForm onSubmit={handleSubmit(onSubmitHandler)}>
