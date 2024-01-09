@@ -58,7 +58,7 @@ const StModal = styled.div<StModalProps>`
   top: 50%;
   left: 50%;
   background-color: white;
-  width: 50%;
+  width: 770px;
   height: 470px;
   display: flex;
   justify-content: flex-start;
