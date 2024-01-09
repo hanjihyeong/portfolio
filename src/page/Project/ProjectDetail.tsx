@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
-import { TbClick } from "react-icons/tb";
 
 interface Project {
   title: string;
@@ -22,20 +21,13 @@ interface Project {
   function: {
     [key: string]: string;
   };
-  retro: {
-    [key: string]: string;
-  };
+  memoir: string[];
 }
 
 const ProjectDetail = () => {
   const ProjectTitle = decodeURIComponent(useParams().id as string);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [retroOpen, setRetroOpen] = useState(false);
-  const [roleOpen, setRoleOpen] = useState(false);
-  const [techOpen, setTechOpen] = useState(false);
-  const [infoOpen, setInfoOpen] = useState(false);
-  const [functionOpen, setFunctionOpen] = useState(false);
   const project = projects[0];
   const navigate = useNavigate();
 
@@ -46,7 +38,6 @@ const ProjectDetail = () => {
     getDocs(q).then(async (querySnapshot) => {
       const fetchedProjects: Project[] = [];
 
-      // Firestore에서 가져온 프로젝트 데이터를 배열에 저장합니다.
       querySnapshot.forEach((doc) => {
         const projectData = doc.data() as Project;
         fetchedProjects.push(projectData);
@@ -56,26 +47,6 @@ const ProjectDetail = () => {
       setLoading(false);
     });
   }, []);
-
-  const handleRetroOpen = () => {
-    setRetroOpen(!retroOpen);
-  };
-
-  const handleRoleOpen = () => {
-    setRoleOpen(!roleOpen);
-  };
-
-  const handleTechOpen = () => {
-    setTechOpen(!techOpen);
-  };
-
-  const handleInfoOpen = () => {
-    setInfoOpen(!infoOpen);
-  };
-
-  const handleFunctionOpen = () => {
-    setFunctionOpen(!functionOpen);
-  };
 
   if (loading) {
     return <Loading />;
@@ -98,77 +69,56 @@ const ProjectDetail = () => {
         </StProjectInfo>
         <StBottomSection>
           <StProjectRoleSection>
-            <StLabel onClick={() => handleInfoOpen()}>
-              프로젝트 개요
-              <TbClick />
-            </StLabel>
-            {infoOpen && (
-              <StUlSection>
-                {Object.entries(project.info).map(([key, value], index) => (
-                  <StLiSection key={index}>
-                    <strong>{key}</strong> : {value}
-                  </StLiSection>
-                ))}
-              </StUlSection>
-            )}
+            <StLabel>프로젝트 개요</StLabel>
+            <StUlSection>
+              {Object.entries(project.info).map(([key, value], index) => (
+                <StLiSection key={index}>
+                  <strong>{key}</strong> : {value}
+                </StLiSection>
+              ))}
+            </StUlSection>
           </StProjectRoleSection>
           <StProjectRoleSection>
-            <StLabel onClick={() => handleFunctionOpen()}>
-              프로젝트 주요 기능
-              <TbClick />
-            </StLabel>
-            {functionOpen && (
-              <StUlSection>
-                {Object.entries(project.function).map(([key, value], index) => (
-                  <StLiSection key={index}>
-                    <strong>{key}</strong> : {value}
-                  </StLiSection>
-                ))}
-              </StUlSection>
-            )}
+            <StLabel>프로젝트 주요 기능</StLabel>
+            <StUlSection>
+              {Object.entries(project.function).map(([key, value], index) => (
+                <StLiSection key={index}>
+                  <strong>{key}</strong> : {value}
+                </StLiSection>
+              ))}
+            </StUlSection>
           </StProjectRoleSection>
           <StProjectRoleSection>
-            <StLabel onClick={() => handleRoleOpen()}>
-              맡은 역할
-              <TbClick />
-            </StLabel>
-            {roleOpen && (
-              <StUlSection>
-                {project.role.map((role, index) => (
-                  <StLiSection key={index}>{role}</StLiSection>
-                ))}
-              </StUlSection>
-            )}
+            <StLabel>맡은 역할</StLabel>
+            <StUlSection>
+              {project.role.map((role, index) => (
+                <StLiSection key={index}>{role}</StLiSection>
+              ))}
+            </StUlSection>
           </StProjectRoleSection>
           <StProjectRoleSection>
-            <StLabel onClick={() => handleTechOpen()}>
-              사용 기술
-              <TbClick />
-            </StLabel>
-            {techOpen && (
-              <StUlSection>
-                {Object.entries(project.tech).map(([key, value], index) => (
-                  <StLiSection key={index}>
-                    <strong>{key}</strong>: {value}
-                  </StLiSection>
-                ))}
-              </StUlSection>
-            )}
+            <StLabel>사용 기술</StLabel>
+            <StUlSection>
+              {Object.entries(project.tech).map(([key, value], index) => (
+                <StLiSection key={index}>
+                  <strong>{key}</strong>: {value}
+                </StLiSection>
+              ))}
+            </StUlSection>
           </StProjectRoleSection>
           <StProjectRoleSection>
-            <StLabel onClick={() => handleRetroOpen()}>
-              회고
-              <TbClick />
-            </StLabel>
-            {retroOpen && (
-              <StUlSection>
-                {Object.entries(project.retro).map(([key, value], index) => (
-                  <StLiSection key={index}>
-                    <strong>{key}</strong>: {value}
-                  </StLiSection>
-                ))}
-              </StUlSection>
-            )}
+            <StLabel>회고</StLabel>
+            <StUlSection>
+              <StLiSection>
+                <strong>잘된 점</strong> : {project.memoir[0]}
+              </StLiSection>
+              <StLiSection>
+                <strong>잘못된 점</strong> : {project.memoir[1]}
+              </StLiSection>
+              <StLiSection>
+                <strong>앞으로</strong> : {project.memoir[2]}
+              </StLiSection>
+            </StUlSection>
           </StProjectRoleSection>
         </StBottomSection>
       </StProjectSection>
@@ -186,6 +136,7 @@ const StContainer = styled.main`
   align-items: center;
   background-color: #6e787d;
   color: black;
+  overflow: hidden;
 `;
 
 const StButton = styled.button`
@@ -223,13 +174,11 @@ const StBottomSection = styled.div`
 const StProjectSection = styled.section`
   display: flex;
   gap: 10px;
-  width: 50%;
-  height: 460px;
+  width: 55%;
+  height: 100vh;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   border: 2px solid lightgray;
-  border-radius: 30px;
-  margin-top: 15px;
   background-color: white;
   flex-direction: column;
   position: relative;
@@ -280,14 +229,14 @@ const StProjectLinkSection = styled.div`
   display: flex;
   gap: 10px;
   margin: 10px 0 0 0;
+  width: 100%;
+  overflow: hidden;
 `;
 
 const StProjectLink = styled.a`
-  color: black;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  width: 90%;
   overflow: hidden;
-  -webkit-line-clamp: 1;
+  color: black;
   font-weight: bold;
   &:hover {
     color: black;
@@ -312,6 +261,6 @@ const StUlSection = styled.ul`
 
 const StLiSection = styled.li`
   margin-bottom: 10px;
-  width: 670px;
+  width: 100%;
   line-height: 2rem;
 `;

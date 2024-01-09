@@ -4,47 +4,51 @@ import { FaSquareGithub } from "react-icons/fa6";
 import { SiBloglovin } from "react-icons/si";
 import { SiNotion } from "react-icons/si";
 import ProfileCard from "../../profileCard/ProfileCard";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { activeLickState } from "../../../atoms";
 
 const SideBar = () => {
-  const [active, setActive] = useState("/");
+  const [activeLink, setActiveLink] = useRecoilState(activeLickState);
 
-  const handleActive = (value: string) => {
-    setActive(value);
+  const handleNavLickClick = (path: string) => {
+    setActiveLink(path);
   };
-  ``;
 
   return (
     <StSideBar>
       <StContainer>
         <Link to="/">
-          {active === "/" ? (
+          {activeLink === "/" ? (
             <StContentActive>Home</StContentActive>
           ) : (
-            <StContent onClick={() => handleActive("/")}>Home</StContent>
+            <StContent onClick={() => handleNavLickClick("/")}>Home</StContent>
           )}
         </Link>
         <Link to="/about">
-          {active === "/about" ? (
+          {activeLink === "/about" ? (
             <StContentActive>About</StContentActive>
           ) : (
-            <StContent onClick={() => handleActive("/about")}>About</StContent>
+            <StContent onClick={() => handleNavLickClick("/about")}>
+              About
+            </StContent>
           )}
         </Link>
         <Link to="/projects">
-          {active === "/projects" ? (
+          {activeLink === "/projects" ? (
             <StContentActive>Projects</StContentActive>
           ) : (
-            <StContent onClick={() => handleActive("/projects")}>
+            <StContent onClick={() => handleNavLickClick("/projects")}>
               Projects
             </StContent>
           )}
         </Link>
         <Link to="/tech">
-          {active === "/tech" ? (
+          {activeLink === "/tech" ? (
             <StContentActive>Tech</StContentActive>
           ) : (
-            <StContent onClick={() => handleActive("/tech")}>Tech</StContent>
+            <StContent onClick={() => handleNavLickClick("/tech")}>
+              Tech
+            </StContent>
           )}
         </Link>
       </StContainer>
