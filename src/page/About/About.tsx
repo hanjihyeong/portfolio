@@ -104,6 +104,11 @@ const StProfileImg = styled.img`
   overflow: hidden;
   margin-left: 20px;
   margin-top: 20px;
+  @media (max-width: 800px) {
+    width: 100px;
+    height: 100px;
+    margin-left: 0;
+  }
 `;
 
 const StProfileContent = styled.h2`
@@ -117,6 +122,14 @@ const StProfileSection = styled.div`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-end;
+  @media (max-width: 1000px) {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
 `;
 
 const StIntroduction = styled.p`
@@ -128,6 +141,20 @@ const StIntroduction = styled.p`
 const StUlSection = styled.ul`
   width: 90%;
   margin-top: 0;
+  @media (max-width: 1000px) {
+    height: 170px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #6e787d;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: none;
+    }
+  }
 `;
 
 const StInfoSection = styled.section`

@@ -10,6 +10,8 @@ import { activeLickState } from "../../../atoms";
 const SideBar = () => {
   const [activeLink, setActiveLink] = useRecoilState(activeLickState);
 
+  const isSmallScreen = window.innerWidth <= 800;
+
   const handleNavLickClick = (path: string) => {
     setActiveLink(path);
   };
@@ -115,6 +117,18 @@ const StContent = styled.h1`
     cursor: pointer;
     text-decoration: underline;
   }
+  @media (max-width: 800px) {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    margin: 10px 10px 10px 10px;
+  }
 `;
 
 const StContentActive = styled.h1`
@@ -127,6 +141,21 @@ const StContentActive = styled.h1`
   width: 120%;
   text-decoration: underline;
   cursor: pointer;
+  @media (max-width: 800px) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    margin: 10px 10px 10px 10px;
+  }
 `;
 
 const StContect = styled.section`
@@ -137,6 +166,9 @@ const StContect = styled.section`
 
 const StContectContent = styled.p`
   color: white;
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const StProfileSection = styled.section`
@@ -149,4 +181,14 @@ const StProfileSection = styled.section`
   align-items: center;
   margin-top: 15px;
   margin-right: 15px;
+  @media (max-width: 800px) {
+    width: auto;
+    height: auto;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
 `;
