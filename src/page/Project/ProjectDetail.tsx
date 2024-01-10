@@ -207,6 +207,9 @@ const StProjectImg = styled.img`
   overflow: hidden;
   margin-left: 20px;
   margin-top: 20px;
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const StProjectTitle = styled.h1`
