@@ -62,18 +62,36 @@ const Tech = () => {
   }
 
   return (
-    <StContainer>
-      <StTitle>🛠️Tech Stack🛠️</StTitle>
-      <StFamilierSection>
-        {renderTechCards(familierTech, 0, 4)}
-        {renderTechCards(familierTech, 4, 8)}
-        {renderTechCards(lessFamiliarTech, 0, 5)}
-      </StFamilierSection>
-    </StContainer>
+    <>
+      <StNoMobile>화면을 늘려주세요</StNoMobile>
+      <StContainer>
+        <StTitle>🛠️Tech Stack🛠️</StTitle>
+        <StFamilierSection>
+          {renderTechCards(familierTech, 0, 4)}
+          {renderTechCards(familierTech, 4, 8)}
+          {renderTechCards(lessFamiliarTech, 0, 5)}
+        </StFamilierSection>
+      </StContainer>
+    </>
   );
 };
 
 export default Tech;
+
+const StNoMobile = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  @media (min-width: 850px) {
+    display: none;
+  }
+`;
 
 const StContainer = styled.main`
   width: 100%;
@@ -85,6 +103,12 @@ const StContainer = styled.main`
   background-color: #6e787d;
   position: relative;
   overflow: hidden;
+  @media (max-width: 850px) {
+    display: none;
+    ${StNoMobile} {
+      display: flex;
+    }
+  }
 `;
 
 const StTitle = styled.section`
