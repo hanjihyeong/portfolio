@@ -10,8 +10,6 @@ import { activeLickState } from "../../../atoms";
 const SideBar = () => {
   const [activeLink, setActiveLink] = useRecoilState(activeLickState);
 
-  const isSmallScreen = window.innerWidth <= 800;
-
   const handleNavLickClick = (path: string) => {
     setActiveLink(path);
   };
