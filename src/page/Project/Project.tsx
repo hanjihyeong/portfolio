@@ -10,26 +10,18 @@ import "swiper/css/pagination";
 import "./MainSwiper.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
-interface Project {
-  title: string;
-  date: string;
-  desc: string;
-  link: string;
-  image: string;
-  role: string;
-}
+import { ProjectTypes } from "../../types";
 
 const Project = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectTypes[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDocs(collection(db, "projects")).then(async (querySnapshot) => {
-      const fetchedProjects: Project[] = [];
+      const fetchedProjects: ProjectTypes[] = [];
 
       querySnapshot.forEach((doc) => {
-        const projectData = doc.data() as Project;
+        const projectData = doc.data() as ProjectTypes;
         fetchedProjects.push(projectData);
       });
 
