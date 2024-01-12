@@ -22,3 +22,10 @@ export interface ProjectTypes {
   };
   memoir: string[];
 }
+
+export interface TechTypes {
+  title: string;
+  image: string;
+  familier: string;
+  desc: string;
+}
