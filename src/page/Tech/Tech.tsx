@@ -5,16 +5,10 @@ import { db } from "../../firebase";
 import TechCard from "../../components/techCard/TechCard";
 import Loading from "../../components/loading/Loading";
 import TechModal from "../../components/modal/TechModal";
-
-interface Tech {
-  title: string;
-  image: string;
-  familier: string;
-  desc: string;
-}
+import { TechTypes } from "../../types";
 
 const Tech = () => {
-  const [techStack, setTechStack] = useState<Tech[]>([]);
+  const [techStack, setTechStack] = useState<TechTypes[]>([]);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState<{ [key: string]: boolean }>({});
 
@@ -24,10 +18,10 @@ const Tech = () => {
 
   useEffect(() => {
     getDocs(collection(db, "teckstacks")).then((querySnapshot) => {
-      const fetchedTechStacks: Tech[] = [];
+      const fetchedTechStacks: TechTypes[] = [];
 
       querySnapshot.forEach((doc) => {
-        const techstackData = doc.data() as Tech;
+        const techstackData = doc.data() as TechTypes;
         fetchedTechStacks.push(techstackData);
       });
 
@@ -42,7 +36,11 @@ const Tech = () => {
 
   const familierTech = techStack.filter((tech) => tech.familier === "Familier");
 
-  const renderTechCards = (techArray: Tech[], start: number, end: number) => {
+  const renderTechCards = (
+    techArray: TechTypes[],
+    start: number,
+    end: number
+  ) => {
     return (
       <StSection>
         {techArray.slice(start, end).map((tech) => (
