@@ -4,12 +4,7 @@ import styled from "styled-components";
 import { db } from "../../firebase";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
-interface Contact {
-  name: string;
-  email: string;
-  message: string;
-}
+import { ContactTypes } from "../../types";
 
 const Contact = () => {
   const navigate = useNavigate();
@@ -17,9 +12,9 @@ const Contact = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Contact>();
+  } = useForm<ContactTypes>();
 
-  const onSubmitHandler: SubmitHandler<Contact> = async (data) => {
+  const onSubmitHandler: SubmitHandler<ContactTypes> = async (data) => {
     console.log(data);
     try {
       const docRef = await addDoc(collection(db, "contacts"), data);

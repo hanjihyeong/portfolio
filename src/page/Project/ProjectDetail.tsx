@@ -4,29 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
-
-interface Project {
-  title: string;
-  date: string;
-  desc: string;
-  link: string;
-  image: string;
-  role: [];
-  tech: {
-    [key: string]: string;
-  };
-  info: {
-    [key: string]: string;
-  };
-  function: {
-    [key: string]: string;
-  };
-  memoir: string[];
-}
+import { ProjectTypes } from "../../types";
 
 const ProjectDetail = () => {
   const ProjectTitle = decodeURIComponent(useParams().id as string);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectTypes[]>([]);
   const [loading, setLoading] = useState(true);
   const project = projects[0];
   const navigate = useNavigate();
@@ -36,10 +18,10 @@ const ProjectDetail = () => {
     const q = query(projectRef, where("title", "==", `${ProjectTitle}`));
 
     getDocs(q).then(async (querySnapshot) => {
-      const fetchedProjects: Project[] = [];
+      const fetchedProjects: ProjectTypes[] = [];
 
       querySnapshot.forEach((doc) => {
-        const projectData = doc.data() as Project;
+        const projectData = doc.data() as ProjectTypes;
         fetchedProjects.push(projectData);
       });
 

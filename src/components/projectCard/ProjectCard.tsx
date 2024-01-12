@@ -1,20 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ProjectTypes } from "../../types";
 
-interface Project {
-  key: string;
-  project: {
-    title: string;
-    date: string;
-    desc: string;
-    link: string;
-    image: string;
-    role: string;
-  };
+interface ProjectCardProps {
+  project: ProjectTypes;
 }
 
-const ProjectCard = (project: Project) => {
-  const { title, date, desc, link, image } = project.project;
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const { title, date, desc, link, image } = project;
   const encodedTitle = encodeURIComponent(title);
   return (
     <StContainer>
