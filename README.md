@@ -44,8 +44,7 @@
   <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
 </div>
 <div align=left>
-  <img src="https://img.shields.io/badge/Recoil-3578E5?style=flat-badge&logo=Recoil&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-badge&logo=Firebase&logoColor=white"/>
-  <img src="https://img.shields.io/badge/ReactHookForm-EC5998?style=flat-badge&logo=ReactHookForm&logoColor=white"/>
-  
+  <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"/>
+  <img src="https://img.shields.io/badge/ReactHookForm-EC5998?style=for-the-badge&logo=ReactHookForm&logoColor=white"/>
 </div>
