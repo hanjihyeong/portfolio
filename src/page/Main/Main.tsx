@@ -9,7 +9,7 @@ const Main = () => {
     <StCotainer>
       <Introduction />
       <Link to={"/contact"}>
-        <StContactImg src={ContactImg} />
+        <StContactImg src={ContactImg} alt="contact" />
       </Link>
     </StCotainer>
   );
