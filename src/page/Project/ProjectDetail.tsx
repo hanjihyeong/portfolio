@@ -5,14 +5,11 @@ import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
 import { ProjectTypes } from "../../types";
-// import { useRecoilState } from "recoil";
-// import { toggleSidebarState } from "../../atoms";
 
 const ProjectDetail = () => {
   const ProjectTitle = decodeURIComponent(useParams().id as string);
   const [projects, setProjects] = useState<ProjectTypes[]>([]);
   const [loading, setLoading] = useState(true);
-  // const [toggleSidebar, setToggleSidebar] = useRecoilState(toggleSidebarState);
   const project = projects[0];
   const navigate = useNavigate();
 
@@ -29,7 +26,6 @@ const ProjectDetail = () => {
       });
 
       setProjects(fetchedProjects);
-      // setToggleSidebar(false);
       setLoading(false);
     });
   }, []);
@@ -127,6 +123,9 @@ const StLeftSection = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const StArticlesSection = styled.div`
@@ -145,6 +144,9 @@ const StArticles = styled.article`
 
 const StArticlesTitle = styled.h2`
   width: 105px;
+  @media (max-width: 500px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const StArticlesContent = styled.span`
@@ -192,6 +194,9 @@ const StRightSection = styled.section`
   background-color: white;
   border-radius: 30px;
   position: relative;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const StProjectImage = styled.img`

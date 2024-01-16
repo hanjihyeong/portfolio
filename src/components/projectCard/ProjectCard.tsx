@@ -38,11 +38,17 @@ const StContainer = styled.main`
   background-color: white;
   gap: 20px;
   z-index: 100;
+  @media (max-width: 500px) {
+    width: 300px;
+  }
 `;
 
 const StSection = styled.section`
   width: 250px;
   height: 250px;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const StImage = styled.img`

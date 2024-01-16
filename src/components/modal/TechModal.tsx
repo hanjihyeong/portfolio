@@ -70,11 +70,18 @@ const StModal = styled.div<StModalProps>`
   animation: ${(props) => (props.$visible ? StSlideUp : StSlideDown)} 0.5s
     forwards;
   color: black;
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 500px;
+  }
 `;
 
 const StTechTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: bold;
+  @media (max-width: 500px) {
+    font-size: 1rem;
+  }
 `;
 
 const StTechSection = styled.section`
@@ -88,6 +95,9 @@ const StTechSection = styled.section`
 const StTechImg = styled.img`
   width: auto;
   height: 180px;
+  @media (max-width: 500px) {
+    transform: scale(0.7);
+  }
 `;
 
 const StTechDesc = styled.p`
@@ -95,6 +105,9 @@ const StTechDesc = styled.p`
   height: auto;
   font-size: 1.2rem;
   line-height: 2rem;
+  @media (max-width: 500px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const StModalDesc = styled.p`

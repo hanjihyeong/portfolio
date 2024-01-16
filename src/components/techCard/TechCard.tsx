@@ -29,6 +29,11 @@ const StContainer = styled.div`
   background-color: white;
   border-radius: 1rem;
   border: 1px solid black;
+  @media (max-width: 500px) {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+  }
 `;
 
 const StImg = styled.img`
@@ -37,6 +42,10 @@ const StImg = styled.img`
   background-color: white;
   object-fit: contain;
   transform: scale(0.8);
+  @media (max-width: 500px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const StImgText = styled.span`
@@ -49,6 +58,9 @@ const StImgText = styled.span`
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   cursor: pointer;
+  @media (max-width: 500px) {
+    font-size: 9px;
+  }
 `;
 
 const StImgContainer = styled.div`
