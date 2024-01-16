@@ -5,11 +5,14 @@ import { db } from "../../firebase";
 import Loading from "../../components/loading/Loading";
 import styled from "styled-components";
 import { ProjectTypes } from "../../types";
+// import { useRecoilState } from "recoil";
+// import { toggleSidebarState } from "../../atoms";
 
 const ProjectDetail = () => {
   const ProjectTitle = decodeURIComponent(useParams().id as string);
   const [projects, setProjects] = useState<ProjectTypes[]>([]);
   const [loading, setLoading] = useState(true);
+  // const [toggleSidebar, setToggleSidebar] = useRecoilState(toggleSidebarState);
   const project = projects[0];
   const navigate = useNavigate();
 
@@ -26,6 +29,7 @@ const ProjectDetail = () => {
       });
 
       setProjects(fetchedProjects);
+      // setToggleSidebar(false);
       setLoading(false);
     });
   }, []);
@@ -36,12 +40,11 @@ const ProjectDetail = () => {
   return (
     <StContainer>
       <StLeftSection>
-        <StButton onClick={() => navigate("/projects")}>돌아가기</StButton>
-
         <StProjectImage src={project.image} />
         <h1>{project.title}</h1>
       </StLeftSection>
       <StRightSection>
+        <StButton onClick={() => navigate("/projects")}>돌아가기</StButton>
         <StArticlesSection>
           <StArticles>
             <StArticlesTitle>개발 기간</StArticlesTitle>
@@ -116,7 +119,7 @@ const StContainer = styled.main`
 `;
 
 const StLeftSection = styled.section`
-  width: 39%;
+  width: 30%;
   height: 100vh;
   background-color: #6e787d;
   border-radius: 30px;
@@ -184,7 +187,7 @@ const StLabel = styled.label`
 `;
 
 const StRightSection = styled.section`
-  width: 60%;
+  width: 69%;
   height: 100vh;
   background-color: white;
   border-radius: 30px;
