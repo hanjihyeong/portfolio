@@ -50,22 +50,24 @@ const About = () => {
             </StProfileContent>
           </StInfoSection>
         </StProfileSection>
-        <StIntroduction>Introduction</StIntroduction>
-        <StUlSection>
-          {introductions.map((list, index) => (
-            <StIntroductionLi key={index}>
-              <StIntroTitle onClick={() => handleClick(index)}>
-                <strong>
-                  {list.title}
-                  <TbClick />
-                </strong>
-              </StIntroTitle>
-              {visible[index] && (
-                <StIntroContent>{list.content}</StIntroContent>
-              )}
-            </StIntroductionLi>
-          ))}
-        </StUlSection>
+        <StRightSection>
+          <StIntroduction>Introduction</StIntroduction>
+          <StUlSection>
+            {introductions.map((list, index) => (
+              <StIntroductionLi key={index}>
+                <StIntroTitle onClick={() => handleClick(index)}>
+                  <strong>
+                    {list.title}
+                    <TbClick />
+                  </strong>
+                </StIntroTitle>
+                {visible[index] && (
+                  <StIntroContent>{list.content}</StIntroContent>
+                )}
+              </StIntroductionLi>
+            ))}
+          </StUlSection>
+        </StRightSection>
       </StProfile>
     </StContainer>
   );
@@ -86,15 +88,11 @@ const StContainer = styled.main`
 const StProfile = styled.div`
   display: flex;
   gap: 10px;
-  width: 50%;
-  height: auto;
-  align-items: flex-start;
-  justify-content: center;
-  border: 2px solid lightgray;
-  border-radius: 30px;
-  margin-top: 15px;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
   background-color: white;
-  flex-direction: column;
 `;
 
 const StProfileImg = styled.img`
@@ -119,17 +117,28 @@ const StProfileContent = styled.h2`
 
 const StProfileSection = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-end;
+  width: auto;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 100px;
   @media (max-width: 1000px) {
     display: flex;
-    width: 100%;
+    width: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
   }
+`;
+
+const StRightSection = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 100px;
 `;
 
 const StIntroduction = styled.p`
@@ -160,6 +169,7 @@ const StUlSection = styled.ul`
 const StInfoSection = styled.section`
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 `;
 
 const StIntroductionLi = styled.li`

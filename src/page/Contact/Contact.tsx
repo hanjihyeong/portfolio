@@ -15,7 +15,6 @@ const Contact = () => {
   } = useForm<ContactTypes>();
 
   const onSubmitHandler: SubmitHandler<ContactTypes> = async (data) => {
-    console.log(data);
     try {
       const docRef = await addDoc(collection(db, "contacts"), data);
       console.log("Document written with ID: ", docRef.id);

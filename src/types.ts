@@ -21,6 +21,8 @@ export interface ProjectTypes {
     [key: string]: string;
   };
   memoir: string[];
+  members: string;
+  platform: string;
 }
 
 export interface TechTypes {
