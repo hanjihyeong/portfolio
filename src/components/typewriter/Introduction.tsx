@@ -43,6 +43,7 @@ const StContent = styled.div`
   font-size: 60px;
   font-weight: bold;
   color: white;
+  margin-left: 50px;
   @media (max-width: 800px) {
     font-size: 25px;
     font-weight: bold;
