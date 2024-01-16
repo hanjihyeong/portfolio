@@ -84,7 +84,7 @@ const StContactForm = styled.form`
   border: 2px solid white;
   border-radius: 1rem;
   position: relative;
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     width: 250px;
   }
 `;
