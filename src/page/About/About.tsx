@@ -93,6 +93,11 @@ const StProfile = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: white;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+    algin-items: flex-start;
+  }
 `;
 
 const StProfileImg = styled.img`
@@ -130,6 +135,9 @@ const StProfileSection = styled.div`
     align-items: center;
     gap: 0.5rem;
   }
+  @media (max-width: 500px) {
+    margin-left: 0;
+  }
 `;
 
 const StRightSection = styled.section`
@@ -139,6 +147,11 @@ const StRightSection = styled.section`
   flex-direction: column;
   width: 50%;
   margin-left: 100px;
+  @media (max-width: 500px) {
+    margin-left: 0;
+    justify-content: flex-start;
+    width: 100%;
+  }
 `;
 
 const StIntroduction = styled.p`
