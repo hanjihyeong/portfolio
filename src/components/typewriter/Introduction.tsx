@@ -48,5 +48,6 @@ const StContent = styled.div`
     font-size: 25px;
     font-weight: bold;
     color: white;
+    margin-left: 10px;
   }
 `;

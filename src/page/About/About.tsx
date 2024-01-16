@@ -93,7 +93,7 @@ const StProfile = styled.div`
   align-items: center;
   justify-content: flex-start;
   background-color: white;
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     justify-content: center;
     algin-items: flex-start;
@@ -112,6 +112,9 @@ const StProfileImg = styled.img`
     height: 100px;
     margin-left: 0;
   }
+  @media (max-width: 1100px) {
+    margin-left: 0;
+  }
 `;
 
 const StProfileContent = styled.h2`
@@ -127,15 +130,16 @@ const StProfileSection = styled.div`
   align-items: flex-start;
   flex-direction: column;
   margin-left: 100px;
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     display: flex;
     width: auto;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    margin-left: 50px;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     margin-left: 0;
   }
 `;
@@ -147,7 +151,7 @@ const StRightSection = styled.section`
   flex-direction: column;
   width: 50%;
   margin-left: 100px;
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     margin-left: 0;
     justify-content: flex-start;
     width: 100%;
@@ -163,7 +167,7 @@ const StIntroduction = styled.p`
 const StUlSection = styled.ul`
   width: 90%;
   margin-top: 0;
-  @media (max-width: 1000px) {
+  @media (max-width: 600px) {
     height: 170px;
     overflow-y: scroll;
     &::-webkit-scrollbar {
