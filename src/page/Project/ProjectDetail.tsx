@@ -37,10 +37,15 @@ const ProjectDetail = () => {
     <StContainer>
       <StLeftSection>
         <StProjectImage src={project.image} />
-        <h1>{project.title}</h1>
+        <StTitleContainer>
+          <StProjectTitle>{project.title}</StProjectTitle>
+          <StButton onClick={() => navigate("/projects")}>돌아가기</StButton>
+        </StTitleContainer>
       </StLeftSection>
       <StRightSection>
-        <StButton onClick={() => navigate("/projects")}>돌아가기</StButton>
+        <StMediaButton onClick={() => navigate("/projects")}>
+          돌아가기
+        </StMediaButton>
         <StArticlesSection>
           <StArticles>
             <StArticlesTitle>개발 기간</StArticlesTitle>
@@ -127,6 +132,15 @@ const StLeftSection = styled.section`
     display: none;
   }
 `;
+const StTitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StProjectTitle = styled.h1`
+  position: relative;
+`;
 
 const StArticlesSection = styled.div`
   margin-left: 15px;
@@ -199,6 +213,27 @@ const StRightSection = styled.section`
   }
 `;
 
+const StMediaButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  background-color: transparent;
+  color: black;
+  height: 50px;
+  box-sizing: border-box;
+  display: none;
+  &:hover,
+  &:focus,
+  &:focusout {
+    outline: none;
+    border: none;
+  }
+  @media (max-width: 500px) {
+    display: block;
+  }
+`;
+
 const StProjectImage = styled.img`
   width: 80%;
   height: auto;
@@ -206,13 +241,14 @@ const StProjectImage = styled.img`
 `;
 
 const StButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
   font-weight: bold;
-  background-color: white;
+  background-color: transparent;
+  color: black;
+  height: 50px;
+  box-sizing: border-box;
   &:hover,
-  &:focus {
+  &:focus,
+  &:focusout {
     outline: none;
     border: none;
   }

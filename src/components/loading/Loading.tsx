@@ -4,7 +4,7 @@ import LoadingImg from "../../assets/Loading.gif";
 const Loading = () => {
   return (
     <StContainer>
-      <img src={LoadingImg} alt="loading" />
+      <StLoadingImg src={LoadingImg} alt="loading" />
     </StContainer>
   );
 };
@@ -18,4 +18,10 @@ const StContainer = styled.main`
   justify-content: center;
   align-items: center;
   background-color: #6e787d;
+`;
+
+const StLoadingImg = styled.img`
+  @media (max-width: 500px) {
+    transform: scale(0.7);
+  }
 `;
