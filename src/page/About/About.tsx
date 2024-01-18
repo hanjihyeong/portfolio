@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import MyImg from "../../assets/backgroundImg.jpg";
 import { useState } from "react";
 import { TbClick } from "react-icons/tb";
+import ProfileImg from "../../assets/MyProfile.jpg";
 
 const About = () => {
   const [visible, setVisible] = useState([false, false, false, false]);
@@ -39,7 +39,7 @@ const About = () => {
     <StContainer>
       <StProfile>
         <StProfileSection>
-          <StProfileImg src={MyImg} alt="profileImg" />
+          <StProfileImg src={ProfileImg} alt="profileImg" />
           <StInfoSection>
             <StProfileContent>Name : 한지형</StProfileContent>
             <StProfileContent>Age : 24</StProfileContent>
